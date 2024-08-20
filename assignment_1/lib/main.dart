@@ -2,6 +2,7 @@
 
 import 'dart:math';
 
+import 'package:assignment_1/StartPage.dart';
 import 'package:assignment_1/loginPage.dart';
 import 'package:assignment_1/registerEmailPage.dart';
 import 'package:assignment_1/registerPhonePage.dart';
@@ -40,7 +41,7 @@ class MyApp extends StatelessWidget {
           secondary: Color(0xFF777a83), // Customize as needed
         ),
       ),
-      home: Loginpage(),
+      home: Startpage(),
     );
   }
 }
