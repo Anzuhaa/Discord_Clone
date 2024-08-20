@@ -1,5 +1,8 @@
 // ignore_for_file: file_names, prefer_const_constructors, prefer_const_literals_to_create_immutables
 
+import 'package:assignment_1/widgets/my_helpbutton.dart';
+import 'package:assignment_1/widgets/my_textbutton.dart';
+import 'package:assignment_1/widgets/my_textfield.dart';
 import 'package:flutter/material.dart';
 
 class Registeremailpage extends StatefulWidget {
@@ -10,6 +13,8 @@ class Registeremailpage extends StatefulWidget {
 }
 
 class _RegisterpageState extends State<Registeremailpage> {
+  final TextEditingController email = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,62 +28,49 @@ class _RegisterpageState extends State<Registeremailpage> {
         ),
       ),
       body: Center(
-        child: Column(
-          children: [
-            SizedBox(height: 16),
-            Text(
-              "Enter phone or email!",
-              style: TextStyle(
-                fontFamily: "MontserratBold",
-                color: Colors.white,
-                fontSize: 24,
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            children: [
+              SizedBox(height: 16),
+              Text(
+                "Enter phone or email!",
+                style: TextStyle(
+                  fontFamily: "MontserratBold",
+                  color: Colors.white,
+                  fontSize: 24,
+                ),
               ),
-            ),
-            SizedBox(height: 24),
-            Padding(
-              padding:
-                  const EdgeInsets.only(left: 16.0, right: 16.0, bottom: 20),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: TextButton.icon(
-                      onPressed: () {},
-                      label: Text(
-                        "Phone",
-                        style: TextStyle(color: Colors.white),
-                      ),
-                      style: TextButton.styleFrom(
+              SizedBox(height: 24),
+              Padding(
+                padding: const EdgeInsets.only(bottom: 20),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: MyTextbutton(
                         backgroundColor: Color(0xFF17161c),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(4.0),
-                        ),
+                        onPressed: () {},
+                        text: "Phone",
+                        textColor: Color(0xFFf3f3f3),
+                        borderRadius: 4,
                       ),
                     ),
-                  ),
-                  Expanded(
-                    child: TextButton.icon(
-                      onPressed: () {},
-                      label: Text(
-                        "Email",
-                        style: TextStyle(color: Colors.white),
-                      ),
-                      style: TextButton.styleFrom(
+                    Expanded(
+                      child: MyTextbutton(
                         backgroundColor: Color(0xFF32323c),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(4.0),
-                        ),
+                        onPressed: () {},
+                        text: "Email",
+                        textColor: Color(0xFFf3f3f3),
+                        borderRadius: 4,
                       ),
                     ),
-                  )
-                ],
+                  ],
+                ),
               ),
-            ),
-            Column(
-              children: [
-                Container(
-                  alignment: Alignment.topLeft,
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 16),
+              Column(
+                children: [
+                  Container(
+                    alignment: Alignment.topLeft,
                     child: Text(
                       "Email",
                       style: TextStyle(
@@ -86,89 +78,27 @@ class _RegisterpageState extends State<Registeremailpage> {
                       ),
                     ),
                   ),
-                ),
-                Container(
-                  padding:
-                      EdgeInsets.only(left: 16, right: 16, top: 4, bottom: 8),
-                  child: TextField(
-                    style: TextStyle(
-                      fontFamily: 'MontserratSemi',
-                      color: Colors.white,
-                    ),
-                    decoration: InputDecoration(
-                      filled: true,
-                      fillColor: Color(0xFF32323c),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(4.0),
-                        borderSide: BorderSide(
-                          color: Color(0xFF1b1b23),
-                        ),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(4.0),
-                        borderSide: BorderSide(
-                          color: Color(0xFF1b1b23),
-                        ),
-                      ),
+                  Container(
+                    padding: EdgeInsets.only(top: 4, bottom: 8),
+                    child: MyTextfield(
                       hintText: "Email",
-                      hintStyle: TextStyle(
-                        fontFamily: 'MontserratSemi',
-                        color: Color(0xFF777a83),
-                      ),
+                      isObsecure: false,
+                      controller: email,
+                      onIconPressed: () {},
                     ),
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 8),
-                  child: Container(
-                    height: 20,
-                    alignment: Alignment.topLeft,
-                    margin: EdgeInsets.only(top: 4, bottom: 2),
-                    padding: EdgeInsets.symmetric(horizontal: 8, vertical: 0),
-                    child: TextButton(
-                      onPressed: () {},
-                      style: TextButton.styleFrom(
-                        padding: EdgeInsets.zero,
-                        backgroundColor: Color(0xff1c1d22),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(4.0),
-                        ),
-                      ),
-                      child: Text(
-                        "View our Privacy Policy",
-                        style: TextStyle(
-                          fontFamily: 'MontserratSemi',
-                          color: Color(0xFF2891d5),
-                          fontSize: 12,
-                        ),
-                      ),
-                    ),
+                  MyHelpbutton(
+                      text: "View our Privacy Policy", onPressed: () {}),
+                  MyTextbutton(
+                    text: "Next",
+                    onPressed: () {},
+                    backgroundColor: Color(0xFF5865f2),
+                    textColor: Color(0xFFf3f3f3),
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 8, right: 8, top: 10),
-                  child: Container(
-                    width: double.infinity,
-                    height: 60,
-                    padding: EdgeInsets.all(8),
-                    child: TextButton.icon(
-                      onPressed: () {},
-                      label: Text(
-                        "Next",
-                        style: TextStyle(color: Colors.white),
-                      ),
-                      style: TextButton.styleFrom(
-                        backgroundColor: Color(0xFF5865f2),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(4.0),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            )
-          ],
+                ],
+              )
+            ],
+          ),
         ),
       ),
     );

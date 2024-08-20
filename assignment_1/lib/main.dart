@@ -1,8 +1,10 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
+import 'dart:math';
+
 import 'package:assignment_1/loginPage.dart';
-// import 'package:assignment_1/registerEmailPage.dart';
-// import 'package:assignment_1/registerPhonePage.dart';
+import 'package:assignment_1/registerEmailPage.dart';
+import 'package:assignment_1/registerPhonePage.dart';
 import 'package:flutter/material.dart';
 
 void main() {

@@ -1,5 +1,8 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, unused_field
 
+import 'package:assignment_1/widgets/my_helpbutton.dart';
+import 'package:assignment_1/widgets/my_textbutton.dart';
+import 'package:assignment_1/widgets/my_textfield.dart';
 import 'package:flutter/material.dart';
 
 class Loginpage extends StatefulWidget {
@@ -11,6 +14,9 @@ class Loginpage extends StatefulWidget {
 
 class _LoginpageState extends State<Loginpage> {
   bool _obscurePassword = true;
+  final TextEditingController _controller = TextEditingController();
+  final TextEditingController username = TextEditingController();
+  final TextEditingController password = TextEditingController();
 
   void _togglePasswordVisibility() {
     setState(() {
@@ -18,7 +24,11 @@ class _LoginpageState extends State<Loginpage> {
     });
   }
 
-  final TextEditingController _controller = TextEditingController();
+  void _toggleUsernameClear() {
+    setState(() {
+      username.clear();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,6 +45,7 @@ class _LoginpageState extends State<Loginpage> {
       body: Center(
         child: Container(
           color: Color(0xff1c1d22),
+          padding: EdgeInsets.all(8),
           child: Column(
             children: [
               SizedBox(height: 16),
@@ -58,7 +69,7 @@ class _LoginpageState extends State<Loginpage> {
               Container(
                 alignment: Alignment.topLeft,
                 margin: EdgeInsets.only(top: 40),
-                padding: EdgeInsets.all(8.0),
+                padding: EdgeInsets.symmetric(vertical: 8),
                 child: Text(
                   textAlign: TextAlign.left,
                   "Account information",
@@ -69,174 +80,37 @@ class _LoginpageState extends State<Loginpage> {
                   ),
                 ),
               ),
-              Container(
-                padding: EdgeInsets.all(8.0),
-                child: TextField(
-                  style: TextStyle(
-                    fontFamily: 'MontserratSemi',
-                    color: Colors.white,
-                  ),
-                  decoration: InputDecoration(
-                    filled: true,
-                    fillColor: Color(0xFF32323c),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(4.0),
-                      borderSide: BorderSide(
-                        color: Color(0xFF1b1b23),
-                      ),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(4.0),
-                      borderSide: BorderSide(
-                        color: Color(0xFF1b1b23),
-                      ),
-                    ),
-                    hintText: "Email or Phone Number",
-                    hintStyle: TextStyle(
-                      fontFamily: 'MontserratSemi',
-                      color: Color(0xFF777a83),
-                    ),
-                    suffixIcon: Padding(
-                      padding: EdgeInsets.only(right: 8.0),
-                      child: IconButton(
-                        icon: Icon(Icons.clear, color: Color(0xFF777a83)),
-                        onPressed: () {
-                          _controller.clear();
-                        },
-                      ),
-                    ),
-                  ),
-                  controller: _controller,
-                ),
+              MyTextfield(
+                hintText: "Email or Phone Number",
+                isObsecure: false,
+                icons: Icons.clear,
+                colors: Color(0xFFc1c1c9),
+                controller: username,
+                onIconPressed: _toggleUsernameClear,
               ),
-              Container(
-                padding: EdgeInsets.only(top: 4, bottom: 8, left: 8, right: 8),
-                child: TextField(
-                  obscureText: _obscurePassword,
-                  style: TextStyle(
-                    fontFamily: 'MontserratSemi',
-                    color: Colors.white,
-                  ),
-                  decoration: InputDecoration(
-                    filled: true,
-                    fillColor: Color(0xFF32323c),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(4.0),
-                      borderSide: BorderSide(
-                        color: Color(0xFF1b1b23),
-                      ),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(4.0),
-                      borderSide: BorderSide(
-                        color: Color(0xFF1b1b23),
-                      ),
-                    ),
-                    hintText: "Password",
-                    hintStyle: TextStyle(
-                      fontFamily: 'MontserratSemi',
-                      color: Color(0xFF777a83),
-                    ),
-                    suffixIcon: GestureDetector(
-                      onTap: _togglePasswordVisibility,
-                      child: Padding(
-                        padding: EdgeInsets.only(right: 8.0),
-                        child: Icon(
-                          _obscurePassword
-                              ? Icons.visibility
-                              : Icons.visibility_off,
-                          color: Color(0xFFc1c1c9),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
+              MyTextfield(
+                hintText: "Password",
+                isObsecure: _obscurePassword,
+                icons:
+                    _obscurePassword ? Icons.visibility : Icons.visibility_off,
+                colors: Color(0xFFc1c1c9),
+                controller: password,
+                onIconPressed: _togglePasswordVisibility,
               ),
-              Container(
-                height: 20,
-                alignment: Alignment.topLeft,
-                margin: EdgeInsets.only(top: 4, bottom: 2),
-                padding: EdgeInsets.symmetric(horizontal: 8, vertical: 0),
-                child: TextButton(
-                  onPressed: () {},
-                  style: TextButton.styleFrom(
-                    padding: EdgeInsets.zero,
-                    backgroundColor: Color(0xff1c1d22),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(4.0),
-                    ),
-                  ),
-                  child: Text(
-                    "Forgot your password?",
-                    style: TextStyle(
-                      fontFamily: 'MontserratSemi',
-                      color: Color(0xFF2891d5),
-                      fontSize: 10,
-                    ),
-                  ),
-                ),
+              MyHelpbutton(text: "Forgot your password?", onPressed: () {}),
+              MyHelpbutton(text: "Use a password manager?", onPressed: () {}),
+              MyTextbutton(
+                text: "Log In",
+                onPressed: () {},
+                backgroundColor: Color(0xFF5865f2),
+                textColor: Color(0xFFf3f3f3),
               ),
-              Container(
-                height: 20,
-                alignment: Alignment.centerLeft,
-                margin: EdgeInsets.only(top: 2, bottom: 8),
-                padding: EdgeInsets.symmetric(horizontal: 8, vertical: 0),
-                child: TextButton(
-                  onPressed: () {},
-                  style: TextButton.styleFrom(
-                    padding: EdgeInsets.zero,
-                    backgroundColor: Color(0xff1c1d22),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(4.0),
-                    ),
-                  ),
-                  child: Text(
-                    "Use a password manager?",
-                    style: TextStyle(
-                      fontFamily: 'MontserratSemi',
-                      color: Color(0xFF2891d5),
-                      fontSize: 10,
-                    ),
-                  ),
-                ),
+              MyTextbutton(
+                text: "Or, sign in with passkey",
+                onPressed: () {},
+                backgroundColor: Color(0xff1c1d22),
+                textColor: Color(0xFF2891d5),
               ),
-              Container(
-                width: double.infinity,
-                height: 60,
-                padding: EdgeInsets.all(8),
-                child: TextButton.icon(
-                  onPressed: () {},
-                  label: Text(
-                    "Log In",
-                    style: TextStyle(color: Colors.white),
-                  ),
-                  style: TextButton.styleFrom(
-                    backgroundColor: Color(0xFF5865f2),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(4.0),
-                    ),
-                  ),
-                ),
-              ),
-              Container(
-                width: double.infinity,
-                padding: EdgeInsets.all(8),
-                child: TextButton(
-                  onPressed: () {},
-                  style: TextButton.styleFrom(
-                    backgroundColor: Color(0xff1c1d22),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(4.0),
-                    ),
-                  ),
-                  child: Text(
-                    "Or, sign in with passkey",
-                    style: TextStyle(
-                      color: Color(0xFF2891d5),
-                    ),
-                  ),
-                ),
-              )
             ],
           ),
         ),
